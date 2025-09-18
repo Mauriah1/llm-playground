@@ -48,16 +48,16 @@ python -m newspaper --url=https://cnsmaryland.org/2025/08/02/in-the-deep-woods-a
 
 Read the story: https://cnsmaryland.org/2025/08/02/in-the-deep-woods-a-little-owl-teaches-big-lessons/ and then compare that to the summary. Is the summary a good description? Why or why not?
 
-PUT YOUR ANSWER HERE.
+PUT YOUR ANSWER HERE. It was a pretty good description as this pretty much summed up what I initally read in the actual story, which I thought was interesting. 
 
 Now it's your turn: find a story that you wrote or are very familiar with that's published online, and try the same process, altering the command and then evaluating the result.
 
 ```bash
-
+$ python -m newspaper --url=https://blackexplosionnews.com/2023/10/23/blog-2023-10-23-panel-featuring-coach-locksley-and-doug-williams-discuss-book-the-rise-of-the-black-quarterback/| llm -m groq/openai/gpt-oss-120b "summarize this story in 3 paragraphs"
 
 ```
 
-YOUR EVALUATION HERE.
+YOUR EVALUATION HERE. This summary was a very good sum of my story, as it included the basic who,what, when, where and why questions. I wasnt really expecting much initally but it ending up being very cool as it included some of my quotes from my intial story and I thought the overall summarizing from a llm was pretty effective. 
 
 ### Restructuring Information
 
@@ -72,10 +72,10 @@ That "no yapping" thing? That's one of the ways you get LLMs to stop narrating t
 Now it's your turn: find a short (3 pages or less) news story that contains unstructured text, save it as a text file and drop it into the list of files on the left side. Then create a prompt like the one above that turns some elements of it into structured data. Put your prompt in the space below, and below that tell me how the LLM did.
 
 ```bash
-
+cat maryland_bucknell_story.txt | llm -m groq-llama-3.3-70b "produce only an array of JSON objects based on the text with the following keys: player_name, team, position, points, rebounds, assists, quote. No yapping."
 ```
 
-PUT YOUR EVALUATION HERE.
+PUT YOUR EVALUATION HERE. I think this was pretty cool, as it could show us the points, the team, the player, rebounds from just interpreting the story. The LLM was surprisingly accurate at extracting structured data from what was essentially a narrative game recap. It correctly identified individual player statistics like Tafara Gapare's 19 points, Derik Queen's 15 points and 8 rebounds, and Julian Reese's 14 points, even though this information was scattered throughout paragraphs of descriptive text. I also liked that it didnt make up any data and put null at the bottom. 
 
 ### Vision Models
 
@@ -90,10 +90,10 @@ You should get something like: "The license number in the image is D25922." as a
 Now it's your turn: find an image _that you would be ok showing to your grandmother_ and make sure it's a PNG, GIF or JPG file. Drag it into the codespace so you can see it in your list of files, then change the command below so that it refers to your image and asks a different question. Edit the README to do that so I can see your work. How did the LLM do?
 
 ```bash
-llm -m gemini-2.5-flash "YOUR QUESTION" -a YOUR_FILE 
+llm -m gemini-2.5-flash "What are all of the colors included in this photo" -a colorphoto.png 
 ```
 
-PUT YOUR EVALUATION HERE.
+PUT YOUR EVALUATION HERE. The model performed exceptionally well at identifying all the colors present in the photo. I was curious to test whether it could accurately recognize and distinguish different colors within an image, and it exceeded my expectations. The vision model not only identified the primary colors but also picked up on subtle color variations and gradients.
 
 
 ### Audio Models
@@ -101,18 +101,19 @@ PUT YOUR EVALUATION HERE.
 Another option is to use models that transcribe audio. Listen to [this mp3 file](https://dare.wisc.edu/audio/south-carolina-desegregating-edisto-state-park/) from the Dictionary of American Regional English project at the University of Wisconsin. Click the download link and save the .mp3 file to your computer, then drag it to the file to the list of files on the left. Then, using llm, have the `whisper-large-v3-turbo` model from Groq provide a transcription using that file name.
 
 ```bash
-llm -m whisper-large-v3-turbo -a YOUR_FILE 
+llm -m groq/whisper-large-v3-turbo -a SC068clip.mp3 
 ```
 
-How did the LLM do compared to the original transcript?
+How did the LLM do compared to the original transcript? 
 
-PUT YOUR EVALUATION HERE.
+PUT YOUR EVALUATION HERE. The Whisper model provided an accurate transcription, capturing not only the words but also maintaining proper punctuation and paragraph breaks. 
 
 ### How You Could Use AI
 
 Thinking about news archives, write a few examples of how you might use LLMs to help (beyond writing code). Be specific: don't say that you'll use it to accomplish a larger goal. Instead, say how it could perform or improve specific tasks. I encourage you to think big.
 
-PUT YOUR ANSWERS HERE.
+PUT YOUR ANSWERS HERE.  You can use LLMs for news archiving by doing document classification and tagging, this would include automatically categorize thousands of archived articles by topic, extract and standardize metadata like publication dates, bylines, and source information, and identify and tag articles containing specific entities (politicians, companies, locations). 
+Also the use of LLMs to analyze the subtle emotional language and cultural attitudes embedded in decades of news coverage from the archives is something I think would be a good use. For example, you could track how the language used to describe mental health issues evolved from the 1950s to today, revealing shifts in social stigma and understanding. This could uncover fascinating stories about how societal attitudes changed over time, which events triggered shifts in public discourse, or even identify bias patterns in how different communities were portrayed across different eras. 
 
 ### Finishing Up
 
